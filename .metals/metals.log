@@ -3094,3 +3094,37 @@ java.nio.file.NoSuchFileException: /Users/racit/Documents/Assignments/Day7/Tasks
 2025.11.15 00:55:07 WARN  no build target for: /Users/racit/Documents/Assignments/Day6/Tasks/Question6.scala
 2025.11.15 00:55:07 INFO  no build target found for /Users/racit/Documents/Assignments/Day6/Tasks/Question6.scala. Using presentation compiler with project's scala-library version: 3.7.3
 2025.11.15 00:56:16 INFO  no build target found for /Users/racit/Documents/Assignments/Day6/Tasks/Question6.scala. Using presentation compiler with project's scala-library version: 3.7.3
+2025.11.15 01:04:14 INFO  Shutting down server
+2025.11.15 01:04:14 INFO  shutting down Metals
+2025.11.15 01:04:14 INFO  Shut down connection with build server.
+2025.11.15 01:04:14 INFO  Exiting server
+2025.11.15 01:07:40 INFO  Started: Metals version 1.6.3 in folders '/Users/racit/Documents/Assignments' for client Visual Studio Code 1.105.1.
+2025.11.15 01:07:40 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2025.11.15 01:07:41 INFO  no build target found for /Users/racit/Documents/Assignments/Day6/Tasks/Question6.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.11.15 01:07:41 INFO  Attempting to connect to the build server...
+2025.11.15 01:07:41 INFO  Running BSP server List(/Users/racit/Library/Application Support/Coursier/bin/.scala-cli.aux, bsp, --json-options, /Users/racit/Documents/Assignments/.scala-build/ide-options-v2.json, --json-launcher-options, /Users/racit/Documents/Assignments/.scala-build/ide-launcher-options.json, --envs-file, /Users/racit/Documents/Assignments/.scala-build/ide-envs.json, /Users/racit/Documents/Assignments)
+2025.11.15 01:07:41 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/racit/Documents/Assignments/.metals/bsp.trace.json or /Users/racit/Library/Caches/org.scalameta.metals/bsp.trace.json
+2025.11.15 01:07:42 INFO  no build target found for /Users/racit/Documents/Assignments/Day6/Tasks/Question6.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.11.15 01:07:42 INFO  no build target found for /Users/racit/Documents/Assignments/Day6/Tasks/Question6.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.11.15 01:07:42 INFO  no build target found for /Users/racit/Documents/Assignments/Day6/Tasks/Question6.scala. Using presentation compiler with project's scala-library version: 3.3.6
+2025.11.15 01:07:42 INFO  no build target found for /Users/racit/Documents/Assignments/Day6/Tasks/Question6.scala. Using presentation compiler with project's scala-library version: 3.3.6
+Nov 15, 2025 1:07:43 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9
+Nov 15, 2025 1:07:43 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10
+2025.11.15 01:07:48 INFO  time: Connected to build server in 6.48s
+2025.11.15 01:07:48 INFO  Connected to Build server: scala-cli v1.9.1
+2025.11.15 01:07:48 INFO  compiling assignments_31502ae451 (52 scala sources)
+2025.11.15 01:07:48 WARN  there was 1 feature warning; re-run with -feature for details
+2025.11.15 01:07:48 WARN  Invalid text document uri received from build server: file:///Users/racit/Documents/Assignments/Day7/Tasks/Question3.scala
+2025.11.15 01:07:48 INFO  time: compiled Assignments_31502ae451 in 0.2s
+2025.11.15 01:07:48 INFO  compiling assignments_31502ae451 (52 scala sources)
+2025.11.15 01:07:48 WARN  there was 1 feature warning; re-run with -feature for details
+2025.11.15 01:07:48 INFO  time: compiled Assignments_31502ae451 in 0.14s
+2025.11.15 01:07:54 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2025.11.15 01:07:54 INFO  time: indexed workspace in 6.71s
+2025.11.15 01:07:55 INFO  compiling assignments_31502ae451 (52 scala sources)
+2025.11.15 01:07:55 WARN  there was 1 feature warning; re-run with -feature for details
+2025.11.15 01:07:55 INFO  time: compiled Assignments_31502ae451 in 0.18s
+Nov 17, 2025 10:13:38 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
