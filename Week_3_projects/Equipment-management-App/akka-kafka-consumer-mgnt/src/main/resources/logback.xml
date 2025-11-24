@@ -1,0 +1,18 @@
+<configuration>
+
+    <!-- Default root level -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Disable noisy Kafka internal DEBUG logs -->
+    <logger name="org.apache.kafka" level="WARN"/>
+    <logger name="akka.kafka" level="INFO"/>
+
+</configuration>

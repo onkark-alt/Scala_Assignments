@@ -1,0 +1,26 @@
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+POST    /auth/register      controllers.AuthController.register
+POST    /auth/login         controllers.AuthController.login
+
+# Employee Routes
+POST        /employees              controllers.EmployeeController.createEmployee
+GET         /employees              controllers.EmployeeController.getAllEmployees
+GET         /employees/:id          controllers.EmployeeController.getEmployee(id: Long)
+PUT         /employees/:id          controllers.EmployeeController.updateEmployee(id: Long)
+DELETE      /employees/:id          controllers.EmployeeController.deleteEmployee(id: Long)
+
+
+# Equipment
+POST   /equipment         controllers.EquipmentController.addEquipment
+GET    /equipment         controllers.EquipmentController.listEquipment
+GET    /equipment/:id     controllers.EquipmentController.getEquipment(id: Long)
+PUT    /equipment/:id     controllers.EquipmentController.updateEquipmentStatus(id: Long)
+PUT    /equipment/:id/status   controllers.EquipmentController.updateEquipmentStatus(id: Long)
+
+POST    /allocation                  controllers.EquipmentAllocationController.allocate
+GET     /allocation/:id              controllers.EquipmentAllocationController.getAllocation(id: Long)
+POST    /allocation/return/:id       controllers.EquipmentAllocationController.markReturned(id: Long)
+GET     /allocation/overdue          controllers.EquipmentAllocationController.overdue
+
+#GET   /kafka/test     controllers.TestController.testKafkaSend

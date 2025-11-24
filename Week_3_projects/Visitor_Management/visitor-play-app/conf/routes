@@ -1,0 +1,33 @@
+# Home
+GET     /                           controllers.HomeController.index()
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+# Auth
+POST    /login                      controllers.AuthController.login
+
+# ============================
+# Visitor
+# ============================
+GET     /visitors                   controllers.VisitorController.list
+GET     /visitors/:id               controllers.VisitorController.get(id: Long)
+POST    /visitors                   controllers.VisitorController.create
+DELETE  /visitors/:id               controllers.VisitorController.delete(id: Long)
+
+# ============================
+# Employee
+# ============================
+GET     /employees                  controllers.EmployeeController.list
+POST    /employees                  controllers.EmployeeController.create
+GET     /employees/:id              controllers.EmployeeController.get(id: Long)
+
+# ============================
+# Visit Logs
+# ============================
+GET     /visitlogs                  controllers.VisitLogController.list
+GET     /visitlogs/visitor/:visitorId  controllers.VisitLogController.getLogs(visitorId: Long)
+
+# ============================
+# Kafka
+# ============================
+POST   /kafka/checkin               controllers.KafkaController.sendVisitorCheckIn
+POST   /kafka/checkout              controllers.KafkaController.sendVisitorCheckOut
