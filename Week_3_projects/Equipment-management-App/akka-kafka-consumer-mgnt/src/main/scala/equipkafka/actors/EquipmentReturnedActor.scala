@@ -1,21 +1,20 @@
 package equipkafka.actors
 
-import akka.actor.typed.Behavior
-import akka.actor.typed.scaladsl.Behaviors
+import akka.actor.{Actor, ActorLogging}
 import play.api.libs.json._
-import equipkafka.utils.NotificationHelper
 import equipkafka.services.EmailService
+import equipkafka.utils.NotificationHelper
 
-object EquipmentReturnedActor {
+class EquipmentReturnedActor extends Actor with ActorLogging {
   import NotificationProtocol._
 
-  def apply(): Behavior[Handle] = Behaviors.setup { ctx =>
-    val email = new EmailService()
+  val email = new EmailService()
 
-    Behaviors.receiveMessage { msg =>
-      ctx.log.info(s"[Returned] ${msg.json}")
+  override def receive: Receive = {
+    case Handle(json, topic) =>
+      log.info(s"[Returned] $json")
 
-      val js = Json.parse(msg.json)
+      val js = Json.parse(json)
       val allocationId = (js \ "allocationId").asOpt[Long]
       val equipmentId  = (js \ "equipmentId").asOpt[Long]
       val condition    = (js \ "returnedCondition").asOpt[String]
@@ -25,10 +24,7 @@ object EquipmentReturnedActor {
       email.sendEmail(
         "onkar.vallal.9@gmail.com",
         "Equipment Returned",
-        s"Equipment $equipmentId returned.\nCondition: $condition\n\n${msg.json}"
+        s"Equipment $equipmentId returned.\nCondition: $condition\n\n$json"
       )
-
-      Behaviors.same
-    }
   }
 }

@@ -1,25 +1,23 @@
 package actors
 
-import akka.actor.typed.scaladsl.Behaviors
-import akka.actor.typed.Behavior
+import akka.actor.{Actor, ActorLogging, Props}
+
+class SecurityActor extends Actor with ActorLogging {
+
+  import SecurityActor._
+
+  override def receive: Receive = {
+    case LogVisitorEntry(visitorName) =>
+      log.info(s"[Security] Visitor ENTERED: $visitorName")
+
+    case LogVisitorExit(visitorName) =>
+      log.info(s"[Security] Visitor EXITED: $visitorName")
+  }
+}
 
 object SecurityActor {
+  case class LogVisitorEntry(visitorName: String)
+  case class LogVisitorExit(visitorName: String)
 
-  sealed trait Command
-  case class LogVisitorEntry(visitorName: String) extends Command
-  case class LogVisitorExit(visitorName: String) extends Command
-
-  def apply(): Behavior[Command] =
-    Behaviors.receive { (_, msg) =>
-      msg match {
-
-        case LogVisitorEntry(visitorName) =>
-          println(s"[Security] Visitor ENTERED: $visitorName")
-
-        case LogVisitorExit(visitorName) =>
-          println(s"[Security] Visitor EXITED: $visitorName")
-      }
-
-      Behaviors.same
-    }
+  def props(): Props = Props(new SecurityActor())
 }

@@ -1,8 +1,8 @@
-import akka.actor.typed.ActorSystem
-import bootstrap.RootBehavior
+import akka.actor.ActorSystem
+import bootstrap.RootActor
 
 object Main {
   def main(args: Array[String]): Unit = {
-    ActorSystem(RootBehavior(), "VisitorConsumerSystem")
+    ActorSystem("VisitorConsumerSystem").actorOf(RootActor.props(), "RootActor")
   }
 }

@@ -1,7 +1,7 @@
 package kafka
 
-import akka.actor.typed.ActorRef
-import akka.actor.typed.ActorSystem
+import akka.actor.ActorRef
+import akka.actor.ActorSystem
 import akka.kafka.{ConsumerSettings, Subscriptions}
 import akka.kafka.scaladsl.Consumer
 import akka.stream.scaladsl.Sink
@@ -15,10 +15,9 @@ object KafkaVisitorConsumer {
 
   private val Topic = "visitor_notifications"
 
-  def run(coordinator: ActorRef[ServiceCoordinatorActor.Command])
-         (implicit system: ActorSystem[_]): Unit = {
+  def run(coordinator: ActorRef)(implicit system: ActorSystem): Unit = {
 
-    implicit val ec: ExecutionContext = system.executionContext
+    implicit val ec: ExecutionContext = system.dispatcher
 
     val consumerSettings =
       ConsumerSettings(system, new StringDeserializer, new StringDeserializer)
@@ -36,7 +35,8 @@ object KafkaVisitorConsumer {
         try {
           coordinator ! ServiceCoordinatorActor.ProcessVisitorEvent(raw.parseJson)
         } catch {
-          case _: Throwable => println(s"⚠️ Invalid JSON: $raw")
+          case _: Throwable =>
+            println(s"⚠️ Invalid JSON: $raw")
         }
 
         Future.successful(())

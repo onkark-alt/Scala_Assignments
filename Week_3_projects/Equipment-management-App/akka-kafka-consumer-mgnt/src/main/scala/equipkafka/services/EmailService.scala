@@ -13,8 +13,8 @@ class EmailService {
   props.put("mail.smtp.host", "smtp.gmail.com")
   props.put("mail.smtp.port", "587")
 
-  private val username = "email@gmail.com"
-  private val password = "password"
+  private val username = "onkar.vallal.9@gmail.com"
+  private val password = "pucxcszckjgzgsaq"
 
   private val session = Session.getInstance(props, new Authenticator() {
     override protected def getPasswordAuthentication =

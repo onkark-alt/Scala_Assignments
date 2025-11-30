@@ -1,29 +1,27 @@
 package bootstrap
 
-import akka.actor.typed.Behavior
-import akka.actor.typed.scaladsl.Behaviors
-import kafka.KafkaVisitorConsumer
+import akka.actor.{Actor, ActorLogging, Props}
 import actors._
+import kafka.KafkaVisitorConsumer
 
-object RootBehavior {
+class RootActor extends Actor with ActorLogging {
 
-  sealed trait Command
+  override def preStart(): Unit = {
+    log.info("RootActor started")
 
-  def apply(): Behavior[Command] =
-    Behaviors.setup { ctx =>
+    val hostActor     = context.actorOf(HostEmployeeActor.props(), "HostEmployeeActor")
+    val itSupport     = context.actorOf(ITSupportActor.props(), "ITSupportActor")
+    val securityActor = context.actorOf(SecurityActor.props(), "SecurityActor")
 
-      // Child actors
-      val hostActor     = ctx.spawn(HostEmployeeActor(), "HostEmployeeActor")
-      val itSupport     = ctx.spawn(ITSupportActor(), "ITSupportActor")
-      val securityActor = ctx.spawn(SecurityActor(), "SecurityActor")
+    val coordinator =
+      context.actorOf(ServiceCoordinatorActor.props(hostActor, itSupport, securityActor), "ServiceCoordinator")
 
-      // Coordinator
-      val coordinator =
-        ctx.spawn(ServiceCoordinatorActor(hostActor, itSupport, securityActor), "ServiceCoordinator")
+    KafkaVisitorConsumer.run(coordinator)(context.system)
+  }
 
-      // Start Kafka Consumer
-      KafkaVisitorConsumer.run(coordinator)(ctx.system)
+  override def receive: Receive = Actor.emptyBehavior
+}
 
-      Behaviors.empty
-    }
+object RootActor {
+  def props(): Props = Props(new RootActor())
 }

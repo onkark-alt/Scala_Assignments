@@ -1,31 +1,30 @@
 package actors
 
-import akka.actor.typed.scaladsl.Behaviors
-import akka.actor.typed.Behavior
+import akka.actor.{Actor, ActorLogging, Props}
 import utils.EmailHelper
 
+class ITSupportActor extends Actor with ActorLogging {
+
+  import ITSupportActor._
+
+  override def receive: Receive = {
+    case SendWifiCredentials(visitorEmail) =>
+      log.info(s"[ITSupport] Sending WiFi credentials to $visitorEmail")
+
+      val subject = "Temporary WiFi Access"
+      val body =
+        s"""
+           |Your WiFi credentials:
+           |Username: temp_visitor
+           |Password: welcome123
+           |""".stripMargin
+
+      EmailHelper.sendEmail(visitorEmail, subject, body)
+  }
+}
+
 object ITSupportActor {
+  case class SendWifiCredentials(visitorEmail: String)
 
-  sealed trait Command
-  case class SendWifiCredentials(visitorEmail: String) extends Command
-
-  def apply(): Behavior[Command] =
-    Behaviors.receive { (_, msg) =>
-      msg match {
-
-        case SendWifiCredentials(visitorEmail) =>
-          println(s"[ITSupport] Sending WiFi credentials to $visitorEmail")
-
-          val subject = "Temporary WiFi Access"
-          val body =
-            s"""
-               |Your WiFi credentials:
-               |Username: temp_visitor
-               |Password: welcome123
-               |""".stripMargin
-
-          EmailHelper.sendEmail(visitorEmail, subject, body)
-          Behaviors.same
-      }
-    }
+  def props(): Props = Props(new ITSupportActor())
 }

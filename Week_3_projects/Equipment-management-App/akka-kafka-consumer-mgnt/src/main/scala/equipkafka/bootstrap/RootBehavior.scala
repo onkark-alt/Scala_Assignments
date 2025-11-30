@@ -1,38 +1,35 @@
-package equipkafka.bootstrap
+package equipkafka.actors
 
-import akka.actor.typed.{Behavior, ActorSystem}
-import akka.actor.typed.scaladsl.Behaviors
+import akka.actor.{Actor, ActorLogging, ActorRef, Props, ActorSystem}
 import equipkafka.kafka.EquipmentKafkaConsumer
-import equipkafka.actors._
 import scala.concurrent.ExecutionContext
 
-sealed trait RootCommand
+class RootSupervisorActor extends Actor with ActorLogging {
 
-object RootBehavior {
+  implicit val system: ActorSystem = context.system
+  implicit val ec: ExecutionContext = context.dispatcher
 
-  def apply(): Behavior[RootCommand] =
-    Behaviors.setup[RootCommand] { ctx =>
+  override def preStart(): Unit = {
+    log.info("RootSupervisorActor initialized. Starting Kafka consumer…")
 
-      implicit val system: ActorSystem[Nothing] = ctx.system
-      implicit val ec: ExecutionContext = ctx.executionContext
+    val allocatedActor = context.actorOf(Props[EquipmentAllocatedActor], "equipmentAllocatedActor")
+    val returnedActor  = context.actorOf(Props[EquipmentReturnedActor],  "equipmentReturnedActor")
+    val damagedActor   = context.actorOf(Props[EquipmentDamagedActor],   "equipmentDamagedActor")
 
-      ctx.log.info("RootBehavior initialized. Starting Kafka consumer…")
+    // Start Kafka Consumer
+    EquipmentKafkaConsumer.start(
+      system,
+      allocatedActor,
+      returnedActor,
+      damagedActor
+    )
+  }
 
-      val allocatedActor = ctx.spawn(EquipmentAllocatedActor(), "equipmentAllocatedActor")
-      val returnedActor  = ctx.spawn(EquipmentReturnedActor(),  "equipmentReturnedActor")
-      val damagedActor   = ctx.spawn(EquipmentDamagedActor(),   "equipmentDamagedActor")
+  override def receive: Receive = {
+    case msg => log.info(s"Root received: $msg")
+  }
+}
 
-      // Start Kafka consumer stream
-      EquipmentKafkaConsumer.start(
-        system,
-        allocatedActor,
-        returnedActor,
-        damagedActor
-      )
-
-      // ❗ KEEP SYSTEM ALIVE — never stop the behavior
-      Behaviors.receiveMessage { _ =>
-        Behaviors.same
-      }
-    }
+object RootSupervisorActor {
+  def props(): Props = Props(new RootSupervisorActor)
 }

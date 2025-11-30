@@ -1,21 +1,20 @@
 package equipkafka.actors
 
-import akka.actor.typed.Behavior
-import akka.actor.typed.scaladsl.Behaviors
+import akka.actor.{Actor, ActorLogging}
 import play.api.libs.json._
 import equipkafka.utils.NotificationHelper
 import equipkafka.services.EmailService
 
-object EquipmentDamagedActor {
+class EquipmentDamagedActor extends Actor with ActorLogging {
   import NotificationProtocol._
 
-  def apply(): Behavior[Handle] = Behaviors.setup { ctx =>
-    val email = new EmailService()
+  val email = new EmailService()
 
-    Behaviors.receiveMessage { msg =>
-      ctx.log.info(s"[Damaged] ${msg.json}")
+  override def receive: Receive = {
+    case Handle(json, topic) =>
+      log.info(s"[Damaged] $json")
 
-      val js = Json.parse(msg.json)
+      val js = Json.parse(json)
       val equipmentId = (js \ "equipmentId").asOpt[Long]
       val notes       = (js \ "notes").asOpt[String]
 
@@ -24,10 +23,7 @@ object EquipmentDamagedActor {
       email.sendEmail(
         "maintenance@gmail.com",
         "⚠ Equipment Damaged",
-        s"Equipment $equipmentId damaged.\nNotes: $notes\n\n${msg.json}"
+        s"Equipment $equipmentId damaged.\nNotes: $notes\n\n$json"
       )
-
-      Behaviors.same
-    }
   }
 }

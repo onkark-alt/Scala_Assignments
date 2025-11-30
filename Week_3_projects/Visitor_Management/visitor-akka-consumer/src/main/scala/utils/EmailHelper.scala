@@ -7,8 +7,8 @@ object EmailHelper {
 
   private val smtpHost = "smtp.gmail.com"
   private val smtpPort = "587"
-  private val username = "email@gmail.com"      // TODO
-  private val password = "password"         // TODO (Gmail App Password)
+  private val username = "onkar.vallal.9@gmail.com"      // TODO
+  private val password = "pucxcszckjgzgsaq"         // TODO (Gmail App Password)
 
   private val session: Session = {
     val props = new java.util.Properties()
@@ -33,11 +33,11 @@ object EmailHelper {
       message.setText(body)
 
       Transport.send(message)
-      println(s"Email sent successfully to $to")
+      println(s"📨 Email sent successfully to $to")
 
     } catch {
       case e: Exception =>
-        println(s"Failed to send email: ${e.getMessage}")
+        println(s"❌ Failed to send email: ${e.getMessage}")
         e.printStackTrace()
     }
   }
