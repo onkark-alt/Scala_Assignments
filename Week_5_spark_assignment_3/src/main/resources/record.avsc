@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "UserEvent",
+  "namespace": "com.example",
+  "fields": [
+    {"name": "id", "type": "string"},
+    {"name": "value", "type": "int"},
+    {"name": "timestamp", "type": "long"}
+  ]
+}
