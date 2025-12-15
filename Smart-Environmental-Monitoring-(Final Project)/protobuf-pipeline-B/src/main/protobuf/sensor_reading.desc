@@ -1,0 +1,15 @@
+
+î
+&src/main/protobuf/sensor_reading.protoexample"²
+SensorReading
+	readingId (	R	readingId
+sensorId (	RsensorId
+zoneId (RzoneId
+pm2_5 (Rpm25
+pm10 (Rpm10
+co2Ppm (Rco2Ppm
+	isAnomaly (R	isAnomaly
+	timestamp (R	timestamp.
+ingestionTimestamp	 (RingestionTimestamp"
+deviceStatus
+ (	RdeviceStatusbproto3

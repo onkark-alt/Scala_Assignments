@@ -1,0 +1,10 @@
+
+Ø
+daily_anomaly_count.protoexample.daily"£
+DailyAnomalyCount
+zone_id (RzoneId
+	zone_name (	RzoneName
+city (	Rcity#
+anomaly_count (RanomalyCount
+record_date (	R
+recordDatebproto3

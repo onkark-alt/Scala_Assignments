@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package example.daily;
+
+message DailyAvgPM {
+  int32 zone_id = 1;
+  string zone_name = 2;
+  string city = 3;
+
+  float avg_pm25 = 4;
+  float avg_pm10 = 5;
+
+  string record_date = 6;
+}

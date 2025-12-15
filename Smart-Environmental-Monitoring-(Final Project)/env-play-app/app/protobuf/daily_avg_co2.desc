@@ -1,0 +1,10 @@
+
+À
+daily_avg_co2.protoexample.daily"‘
+DailyAvgCO2
+zone_id (RzoneId
+	zone_name (	RzoneName
+city (	Rcity
+avg_co2 (RavgCo2
+record_date (	R
+recordDatebproto3

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package example;
+
+message SensorReading {
+  string readingId = 1;
+  string sensorId = 2;
+  int32 zoneId = 3;
+
+  float pm2_5 = 4;
+  float pm10 = 5;
+  float co2Ppm = 6;
+
+  bool isAnomaly = 7;
+
+  int64 timestamp = 8;
+  int64 ingestionTimestamp = 9;
+
+  string deviceStatus = 10;
+}

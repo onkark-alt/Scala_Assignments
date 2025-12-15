@@ -1,0 +1,4 @@
+GET /zone/:id                     controllers.ZoneController.zone(id: Int)
+GET /zone/:id/recentReadings      controllers.ZoneController.recentReadings(id: Int, limit: Int ?= 50)
+GET /zone/:id/dailySummary        controllers.ZoneController.dailySummary(id: Int)
+GET /zone/:id/pollutionHistory    controllers.ZoneController.pollutionHistory(id: Int)

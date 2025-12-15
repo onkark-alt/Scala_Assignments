@@ -1,0 +1,12 @@
+
+Û
+daily_avg_pm.protoexample.daily"­
+
+DailyAvgPM
+zone_id (RzoneId
+	zone_name (	RzoneName
+city (	Rcity
+avg_pm25 (RavgPm25
+avg_pm10 (RavgPm10
+record_date (	R
+recordDatebproto3

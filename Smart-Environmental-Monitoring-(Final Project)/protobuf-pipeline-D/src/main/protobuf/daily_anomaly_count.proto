@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package example.daily;
+
+message DailyAnomalyCount {
+  int32 zone_id = 1;
+  string zone_name = 2;
+  string city = 3;
+
+  int32 anomaly_count = 4;
+
+  string record_date = 5;
+}
